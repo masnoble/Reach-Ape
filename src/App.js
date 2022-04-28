@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'; 
+import './App.css'; 
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; 
+import Ape from './Ape'; 
+import Login from './components/Login'; 
+ 
+class App extends Component {  
+    constructor(props) {  
+        super(props);
+        this.state = {
+            isLoggedIn: false
+         };
+         this.setLoggedIn = this.setLoggedIn.bind(this)
+    }  
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    setLoggedIn(tf){
+        this.setState({isLoggedIn: tf});
+    }
 
+ 
+    render(){ 
+        return ( 
+            <div className="wrapper"> 
+                {this.state.isLoggedIn && <Ape setLoggedIn = {this.setLoggedIn}/>}
+                {! this.state.isLoggedIn && <Login setLoggedIn = {this.setLoggedIn} />}	 
+            </div> 
+        ); 
+    }
+
+} 
+ 
 export default App;
