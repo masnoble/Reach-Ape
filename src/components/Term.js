@@ -3,7 +3,14 @@ import React, {Component} from 'react';
 class Term extends Component {
 	
 	render (){
+		let dispYear;
 		const courseList = this.props.data;
+		if(this.props.term != "Fall"){
+			dispYear = this.props.year+1;
+		}
+		else{
+			dispYear = this.props.year;
+		}
 		let courses = Object.entries(courseList).map(([key,value]) => {
 		  	const courseName = key+ " " + this.props.catalog.courses[key].name;
 		  	return (
@@ -14,9 +21,7 @@ class Term extends Component {
 		});
 		return (
 		<div className="semester">
-			<div className="semHeader">
-				{this.props.term}
-			</div>
+			{this.props.term} {dispYear}
 			{courses}
 		</div>
 	  	);

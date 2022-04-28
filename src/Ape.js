@@ -16,6 +16,10 @@ class Ape extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.loadNewPlan();
+	}
+
 	loadNewPlan(){
 		fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getCombinedNoSession.php')
 			 .then(response => response.json())
@@ -25,10 +29,6 @@ class Ape extends Component {
 		fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getRequirementsNoSession.php')
 			 .then(response => response.json())
 			 .then(data => this.setState({requirements: data}));
-	}
-
-	componentDidMount() {
-		this.loadNewPlan();
 	}
 	
 	convertPlan(currPlan) {
@@ -58,19 +58,22 @@ class Ape extends Component {
 	
 	logout(){
 		this.props.setLoggedIn(false)
+		this.props.setUser(null);
   	}
 	 
 
 	render(){
 		return (
-		  <div className="App" id="main">
-			  <Banner/>
-			  {/*<BannerRight planList={this.state.planList}/> */}
-			  {/*<UpperLeft requirements={this.state.requirements} catalog={this.state.catalog} /> */}
-			  <UpperRight plan={this.state.plan} catalog={this.state.catalog}/>
-			  <button onClick = {this.logout.bind(this)}>Log Out </button>
-			  {/*<LowerLeft /> */}
-			  {/*<LowerRight catalog={this.state.catalog} /> */}
+		  <div className="content" id="main"> <Banner/>
+			  <div className="left">
+					{/*<UpperLeft requir>ements={this.state.requirements} catalog={this.state.catalog} /> */}
+					{/*<LowerLeft /> */}
+					<button onClick = {this.logout.bind(this)}>Log Out </button>
+			  </div>
+			  <div className="right">
+			  		<UpperRight plan={this.state.plan} catalog={this.state.catalog}/>
+					{/*<LowerRight catalog={this.state.catalog} /> */}
+			  </div>
 		  </div>
 		);
 	  }

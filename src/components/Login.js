@@ -9,9 +9,33 @@ class Login extends Component {
         this.setState({username: name})
     }
 
+    handlePassChanged(event){
+        var pass = event.target.value;
+        this.setState({password: pass})
+    }
+
     handleSubmit(event){
+
         event.preventDefault();
-        this.props.setLoggedIn(true);
+        fetch("http://judah.cedarville.edu/~jthomas/vJosh/proj5/login.php", {
+            // Adding method type
+            method: "POST",
+            //mode: 'no-cors',
+            // Adding body or contents to send
+            body: JSON.stringify({
+                'username': this.state.username,
+                'password': this.state.password,
+                'action': "login",
+            })
+        })
+        .then(response => response.json())
+	    .then(data => {
+            if(data.result){
+                this.props.setLoggedIn(true);
+                this.props.setUser(this.state.username);
+            }
+        });
+
     }
 
     render(){
@@ -19,11 +43,11 @@ class Login extends Component {
             <form onSubmit={this.handleSubmit.bind(this)}>
             <label>
                 <p>Username</p>
-                <input type="text" id="username" onChange={this.handleNameChanged.bind(this)}/>	
+                <input type="text" id="username" name="username" onChange={this.handleNameChanged.bind(this)}/>	
             </label>
             <label>
                 <p>Password</p>
-                <input type="password" />
+                <input type="password" name="password" onChange={this.handlePassChanged.bind(this)} />
             </label>
             <div>
                 <button type="submit">Submit</button>
