@@ -8,21 +8,26 @@ class App extends Component {
     constructor(props) {  
         super(props);
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: false,
+            user: null
          };
-         this.setLoggedIn = this.setLoggedIn.bind(this)
+        this.setLoggedIn = this.setLoggedIn.bind(this)
     }  
 
     setLoggedIn(tf){
         this.setState({isLoggedIn: tf});
     }
 
+    setUser(usr){
+        this.setState({user: usr});
+    }
+
  
     render(){ 
         return ( 
             <div className="wrapper"> 
-                {this.state.isLoggedIn && <Ape setLoggedIn = {this.setLoggedIn}/>}
-                {! this.state.isLoggedIn && <Login setLoggedIn = {this.setLoggedIn} />}	 
+                {this.state.isLoggedIn && <Ape setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}
+                {! this.state.isLoggedIn && <Login setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}	 
             </div> 
         ); 
     }
