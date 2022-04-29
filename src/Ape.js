@@ -13,6 +13,7 @@ class Ape extends Component {
 		  plan: null,
 		  planList: null,
 		  catalog: null,
+		  planChc: -1,
 		};
 	}
 
@@ -21,17 +22,41 @@ class Ape extends Component {
 	}
 
 	loadNewPlan(){
-		fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getCombinedNoSession.php')
-			 .then(response => response.json())
-			 .then(data => this.setState({plan: this.convertPlan(data.plan),
-				  planList: data.planList, catalog: data.catalog}));
+
+		console.log(this.props.user);
+
+		fetch("http://judah.cedarville.edu/~jthomas/vJosh/proj5/getAll.php", {
+            // Adding method type
+            method: "POST",
+            //mode: 'no-cors',
+            // Adding body or contents to send
+            body: JSON.stringify({
+                'plan': this.state.planChc,
+				'ID': this.props.user,
+            })
+        })
+        .then(response => response.json())
+	    .then(data => this.setState({
+            plan: this.convertPlan(data.plan),
+			planChc: data.planChoices,
+			catalog: data.catalog,
+			requirements: data.requirements,
+		}));
+		
+		// fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getCombinedNoSession.php')
+		// 	 .then(response => response.json())
+		// 	 .then(data => this.setState({plan: this.convertPlan(data.plan),
+		// 		  planList: data.planList, catalog: data.catalog}));
 		 
-		fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getRequirementsNoSession.php')
-			 .then(response => response.json())
-			 .then(data => this.setState({requirements: data}));
+		// fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getRequirementsNoSession.php')
+		// 	 .then(response => response.json())
+		// 	 .then(data => this.setState({requirements: data}));
 	}
 	
 	convertPlan(currPlan) {
+		if(currPlan == "problem finding student for plan"){
+			return currPlan;
+		}
 		currPlan.years = [];
 		for (var key in currPlan.courses) {
 			var course = currPlan.courses[key];
@@ -60,7 +85,6 @@ class Ape extends Component {
 		this.props.setLoggedIn(false)
 		this.props.setUser(null);
   	}
-	 
 
 	render(){
 		return (
@@ -77,8 +101,6 @@ class Ape extends Component {
 		  </div>
 		);
 	  }
-
-  
 }
 
 export default Ape;

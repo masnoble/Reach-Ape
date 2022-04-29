@@ -10,8 +10,9 @@ class App extends Component {
         this.state = {
             isLoggedIn: false,
             user: null
-         };
-        this.setLoggedIn = this.setLoggedIn.bind(this)
+        };
+        this.setLoggedIn = this.setLoggedIn.bind(this);
+        this.setUser = this.setUser.bind(this);
     }  
 
     setLoggedIn(tf){
@@ -26,7 +27,7 @@ class App extends Component {
     render(){ 
         return ( 
             <div className="wrapper"> 
-                {this.state.isLoggedIn && <Ape setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}
+                {this.state.isLoggedIn && <Ape user={this.state.user} setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}
                 {! this.state.isLoggedIn && <Login setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}	 
             </div> 
         ); 
