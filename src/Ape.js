@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Term from './components/Term';
 //import logo from './logo.svg';
 import './App.css';
 import Banner from './components/Banner';
 import UpperRight from './components/UpperRight';
 import LowerLeft from './components/LowerLeft';
+
 
 class Ape extends Component {
 	constructor(props) {
@@ -60,7 +60,13 @@ class Ape extends Component {
 		currPlan.years = [];
 		for (var key in currPlan.courses) {
 			var course = currPlan.courses[key];
-			var currYear = course.year;
+			var currYear;
+			if(course.term != "Fall"){
+				currYear = course.year-1;
+			}
+			else{
+				currYear = course.year;
+			}
 			if (currPlan.years[currYear] === undefined){
 				currPlan.years[currYear] = [];
 				currPlan.years[currYear]['year'] = currYear;
@@ -90,7 +96,7 @@ class Ape extends Component {
 		return (
 		  <div className="content" id="main"> <Banner/>
 			  <div className="left">
-					{/*<UpperLeft requir>ements={this.state.requirements} catalog={this.state.catalog} /> */}
+					{/* <UpperLeft requirements={this.state.requirements} catalog={this.state.catalog} /> */}
 					<div id='LL'>
 						<LowerLeft planChs={this.state.planChc}/>
 						<button onClick = {this.logout.bind(this)}>Log Out </button>
