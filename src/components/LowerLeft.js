@@ -35,6 +35,7 @@ class UpperRight extends Component {
 			<div>
 				<label for="planChs">Chose Plan:</label>
 				<select id="planChs" onChange="refreshInfo(this);">
+					<option value={-1}>Select a plan here</option>
 					{planChoices}
 				</select>
 			</div>

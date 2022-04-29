@@ -91,8 +91,10 @@ class Ape extends Component {
 		  <div className="content" id="main"> <Banner/>
 			  <div className="left">
 					{/*<UpperLeft requir>ements={this.state.requirements} catalog={this.state.catalog} /> */}
-					<LowerLeft planChs={this.state.planChc}/>
-					<button onClick = {this.logout.bind(this)}>Log Out </button>
+					<div id='LL'>
+						<LowerLeft planChs={this.state.planChc}/>
+						<button onClick = {this.logout.bind(this)}>Log Out </button>
+					</div>
 			  </div>
 			  <div className="right">
 			  		<UpperRight plan={this.state.plan} catalog={this.state.catalog}/>
