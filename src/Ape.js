@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Banner from './components/Banner';
 import UpperRight from './components/UpperRight';
+import UpperLeft from './components/UpperLeft'
 import LowerLeft from './components/LowerLeft';
 
 
@@ -96,7 +97,7 @@ class Ape extends Component {
 		return (
 		  <div className="content" id="main"> <Banner/>
 			  <div className="left">
-					{/* <UpperLeft requirements={this.state.requirements} catalog={this.state.catalog} /> */}
+					<UpperLeft requirements={this.state.requirements} catalog={this.state.catalog} />
 					<div id='LL'>
 						<LowerLeft planChs={this.state.planChc}/>
 						<button onClick = {this.logout.bind(this)}>Log Out </button>
