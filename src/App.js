@@ -1,4 +1,4 @@
-import React, {Component} from 'react'; 
+import React, {Component, useImperativeHandle} from 'react'; 
 import './App.css'; 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'; 
 import Ape from './Ape'; 
@@ -9,7 +9,7 @@ class App extends Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-            user: null
+            userID: null
         };
         this.setLoggedIn = this.setLoggedIn.bind(this);
         this.setUser = this.setUser.bind(this);
@@ -19,15 +19,15 @@ class App extends Component {
         this.setState({isLoggedIn: tf});
     }
 
-    setUser(usr){
-        this.setState({user: usr});
+    setUser(usrID){
+        this.setState({userID: usrID});
     }
 
  
     render(){ 
         return ( 
             <div className="wrapper"> 
-                {this.state.isLoggedIn && <Ape user={this.state.user} setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}
+                {this.state.isLoggedIn && <Ape user={this.state.userID} setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}
                 {! this.state.isLoggedIn && <Login setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}	 
             </div> 
         ); 

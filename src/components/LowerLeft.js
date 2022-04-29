@@ -5,35 +5,39 @@ class UpperRight extends Component {
 	
 	render (){
 
-		let planChoices = combd.planChoices;
-		//select = document.getElementById('year');
-		let select = document.getElementById('planChs');
-		select.textContent = '';
-		let newOption = document.createElement('option');
-		newOption.text = "Select a plan here";
-		select.add(newOption);
-		for(const [id, pln] of Object.entries(planChoices)){
-			newOption = document.createElement('option');
-			newOption.text = pln;
-			newOption.value = id;
-			select.add(newOption);
-		}
+		// let planChoices = this.props.planChs
+		// //select = document.getElementById('year');
+		// let newOption = document.createElement('option');
+		// newOption.text = "Select a plan here";
+		// select.add(newOption);
+		// for(const [id, pln] of Object.entries(planChoices)){
+		// 	let newOption = document.createElement('option');
+		// 	newOption.text = pln;
+		// 	newOption.value = id;
+		// 	select.add(newOption);
+		// }
 
-	
-	  var yrs = "";
-	  if (this.props.plan && this.props.plan.years) {
-		 yrs = this.props.plan.years.map((value, key) => {
-		  return (
-				<Year catalog={this.props.catalog} year={key} data={value} />
-			);		
-	  });
-	  }
+		//console.log(this.props.planChs);
+
+
+		let data = this.props.planChs
+		let planChoices = "";
+		if (this.props.planChs) {
+			planChoices = Object.values(data).map((value, key) => {
+			return (
+					<option value={key}>
+						{value}
+					</option>
+				);		
+			});
+		}
 	  return (
-		<div id="UR">
-			<div id="plan">
-				{yrs}
+			<div>
+				<label for="planChs">Chose Plan:</label>
+				<select id="planChs" onChange="refreshInfo(this);">
+					{planChoices}
+				</select>
 			</div>
-		</div>
 	  );
 	}	
 }

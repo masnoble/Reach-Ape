@@ -32,10 +32,7 @@ class Login extends Component {
 	    .then(data => {
             if(data.result){
                 this.props.setUser(data.userId);
-                
                 this.props.setLoggedIn(true);
-                
-		        
             }
         });
 

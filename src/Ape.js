@@ -25,8 +25,6 @@ class Ape extends Component {
 
 	loadNewPlan(){
 
-		console.log(this.props.user);
-
 		fetch("http://judah.cedarville.edu/~jthomas/vJosh/proj5/getAll.php", {
             // Adding method type
             method: "POST",
@@ -94,7 +92,6 @@ class Ape extends Component {
 			  <div className="left">
 					{/*<UpperLeft requir>ements={this.state.requirements} catalog={this.state.catalog} /> */}
 					<LowerLeft planChs={this.state.planChc}/>
-
 					<button onClick = {this.logout.bind(this)}>Log Out </button>
 			  </div>
 			  <div className="right">
