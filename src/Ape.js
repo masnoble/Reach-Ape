@@ -4,6 +4,7 @@ import Term from './components/Term';
 import './App.css';
 import Banner from './components/Banner';
 import UpperRight from './components/UpperRight';
+import LowerLeft from './components/LowerLeft';
 
 class Ape extends Component {
 	constructor(props) {
@@ -13,7 +14,8 @@ class Ape extends Component {
 		  plan: null,
 		  planList: null,
 		  catalog: null,
-		  planChc: -1,
+		  planChc: null,
+		  planId: -1,
 		};
 	}
 
@@ -31,7 +33,7 @@ class Ape extends Component {
             //mode: 'no-cors',
             // Adding body or contents to send
             body: JSON.stringify({
-                'plan': this.state.planChc,
+                'plan': this.state.planId,
 				'ID': this.props.user,
             })
         })
@@ -91,7 +93,8 @@ class Ape extends Component {
 		  <div className="content" id="main"> <Banner/>
 			  <div className="left">
 					{/*<UpperLeft requir>ements={this.state.requirements} catalog={this.state.catalog} /> */}
-					{/*<LowerLeft /> */}
+					<LowerLeft planChs={this.state.planChc}/>
+
 					<button onClick = {this.logout.bind(this)}>Log Out </button>
 			  </div>
 			  <div className="right">
