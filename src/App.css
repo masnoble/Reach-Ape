@@ -1,6 +1,3 @@
-header {
-}
-
 html,body {
     margin: 0;
     padding: 0;
@@ -8,13 +5,10 @@ html,body {
     height:fit-content;
     width: -moz-fit-content;
     width: -webkit-fit-content;
-
     animation: gradient 60s ease infinite;
 }
 
 body {
-
-    
     background-repeat: no-repeat;
     background-size: 400% 400%;
     margin: 0;
@@ -65,7 +59,7 @@ body {
     margin: 0 auto;
     text-align: right;
     float: left;
-    color: #ffffff;
+    color: #589b25;
     animation: glow 1s ease-in-out infinite alternate;
 }
 

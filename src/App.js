@@ -9,10 +9,13 @@ class App extends Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-            userID: null
+            userID: null,
+            planId: -1
         };
         this.setLoggedIn = this.setLoggedIn.bind(this);
         this.setUser = this.setUser.bind(this);
+        this.planChanged = this.planChanged.bind(this);
+        this.child = React.createRef()
     }  
 
     setLoggedIn(tf){
@@ -23,11 +26,17 @@ class App extends Component {
         this.setState({userID: usrID});
     }
 
+    planChanged(id){
+        this.setState({planId: id});
+        console.log(id);
+        this.child.current.update();
+    }
+
  
     render(){ 
         return ( 
             <div className="wrapper"> 
-                {this.state.isLoggedIn && <Ape user={this.state.userID} setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}
+                {this.state.isLoggedIn && <Ape ref={this.child} planId={this.state.planId} user={this.state.userID} setLoggedIn = {this.setLoggedIn} setUser = {this.setUser} planChanged={this.planChanged}/>}
                 {! this.state.isLoggedIn && <Login setLoggedIn = {this.setLoggedIn} setUser = {this.setUser}/>}	 
             </div> 
         ); 

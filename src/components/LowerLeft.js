@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 
 class LowerLeft extends Component {
 
-	
+
+	handleChanged(event){
+		this.props.planChanged(event.target.value);
+	}
+
 	render (){
 
 		// let planChoices = this.props.planChs
@@ -23,10 +27,12 @@ class LowerLeft extends Component {
 		let data = this.props.planChs
 		let planChoices = "";
 		if (this.props.planChs) {
-			planChoices = Object.values(data).map((value, key) => {
+			planChoices = Object.entries(data).map((value, key) => {
+			// console.log(value[0]);
+			// console.log(Object.entries(data));
 			return (
-					<option value={key}>
-						{value}
+					<option value={value[0]}>
+						{value[1]}
 					</option>
 				);		
 			});
@@ -34,7 +40,7 @@ class LowerLeft extends Component {
 	  return (
 			<div>
 				<label for="planChs">Chose Plan:</label>
-				<select id="planChs" onChange="refreshInfo(this);">
+				<select id="planChs" onChange={this.handleChanged.bind(this)}>
 					<option value={-1}>Select a plan here</option>
 					{planChoices}
 				</select>

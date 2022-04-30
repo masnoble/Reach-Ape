@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 //import logo from './logo.svg';
 import './App.css';
 import Banner from './components/Banner';
@@ -19,16 +20,27 @@ class Ape extends Component {
 		  planList: null,
 		  catalog: null,
 		  planChc: null,
-		  planId: -1,
 		};
-		this.child = React.createRef()
+		this.handleChanged = this.handleChanged.bind(this);
 	}
 
 	componentDidMount() {
+		console.log("component");
 		this.loadNewPlan();
-		
 	}
 
+	update(){
+		console.log("cwoeifnewoin");
+		this.setState({
+			requirements: null,
+			plan: null,
+			planList: null,
+			catalog: null,
+			planChc: null,
+		  })
+		this.loadNewPlan();
+	}
+	
 	loadNewPlan(){
 
 		fetch("http://judah.cedarville.edu/~jthomas/vJosh/proj5/getAll.php", {
@@ -37,7 +49,7 @@ class Ape extends Component {
             //mode: 'no-cors',
             // Adding body or contents to send
             body: JSON.stringify({
-                'plan': this.state.planId,
+                'plan': this.props.planId,
 				'ID': this.props.user,
             })
         })
@@ -99,29 +111,21 @@ class Ape extends Component {
 		this.props.setUser(null);
   	}
 
-	buildDT(){
-
-		
-		// let courses = Object.values(this.state.catalog.courses);
-		// $("#catalog").DataTable({
-		// 	data: courses, 
-		// 	columns: [
-		// 		{ data: 'id', title: 'ID' },
-		// 		{ data: 'name', title: 'Name'},
-		// 		{ data: 'description',title: 'Description' },
-		// 		{ data: 'credits',title: 'Credits' }
-		// 	]
-		// });
+	handleChanged(id){
+		//console.log(event.target.value);
+		//console.log("IHIHIHIH");
+		this.props.planChanged(id);
 	}
 
 
 	render(){
+		//console.log("render");
 		return (
 		  <div className="content" id="main"> <Banner/>
 			  <div className="left">
 					<UpperLeft requirements={this.state.requirements} catalog={this.state.catalog} />
 					<div id='LL'>
-						<LowerLeft planChs={this.state.planChc}/>
+						<LowerLeft planChs={this.state.planChc} planChanged={this.handleChanged}/>
 						<button onClick = {this.logout.bind(this)}>Log Out </button>
 					</div>
 			  </div>
