@@ -5,6 +5,9 @@ import Banner from './components/Banner';
 import UpperRight from './components/UpperRight';
 import UpperLeft from './components/UpperLeft'
 import LowerLeft from './components/LowerLeft';
+import LowerRight from './components/LowerRight';
+const $ = require('jquery');
+$.DataTable = require('datatables.net');
 
 
 class Ape extends Component {
@@ -18,10 +21,12 @@ class Ape extends Component {
 		  planChc: null,
 		  planId: -1,
 		};
+		this.child = React.createRef()
 	}
 
 	componentDidMount() {
 		this.loadNewPlan();
+		
 	}
 
 	loadNewPlan(){
@@ -42,7 +47,8 @@ class Ape extends Component {
 			planChc: data.planChoices,
 			catalog: data.catalog,
 			requirements: data.requirements,
-		}));
+		})
+		);
 		
 		// fetch('http://judah.cedarville.edu/~gallaghd/cs3220/ape/getCombinedNoSession.php')
 		// 	 .then(response => response.json())
@@ -93,6 +99,22 @@ class Ape extends Component {
 		this.props.setUser(null);
   	}
 
+	buildDT(){
+
+		
+		// let courses = Object.values(this.state.catalog.courses);
+		// $("#catalog").DataTable({
+		// 	data: courses, 
+		// 	columns: [
+		// 		{ data: 'id', title: 'ID' },
+		// 		{ data: 'name', title: 'Name'},
+		// 		{ data: 'description',title: 'Description' },
+		// 		{ data: 'credits',title: 'Credits' }
+		// 	]
+		// });
+	}
+
+
 	render(){
 		return (
 		  <div className="content" id="main"> <Banner/>
@@ -104,8 +126,8 @@ class Ape extends Component {
 					</div>
 			  </div>
 			  <div className="right">
-			  		<UpperRight plan={this.state.plan} catalog={this.state.catalog}/>
-					{/*<LowerRight catalog={this.state.catalog} /> */}
+			  		<UpperRight plan={this.state.plan} catalog={this.state.catalog} doCat={this.buildDT}/>
+					{this.state.catalog && <LowerRight catalog={this.state.catalog} ref={this.child}/> }
 			  </div>
 		  </div>
 		);

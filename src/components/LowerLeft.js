@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class UpperRight extends Component {
+class LowerLeft extends Component {
 
 	
 	render (){
@@ -43,4 +43,4 @@ class UpperRight extends Component {
 	}	
 }
 
-export default UpperRight;
+export default LowerLeft;
